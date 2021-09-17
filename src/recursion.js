@@ -541,6 +541,18 @@ var augmentElements = function(array, aug) {
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
 var minimizeZeroes = function(array) {
+  var results = [];
+  if (array.length === 0) {
+    return results;
+  }
+
+  var value = array.shift();
+  results = results.concat(minimizeZeroes(array));
+  if (value !== 0 || results[0] !== 0) {
+    results.unshift(value);
+  }
+
+  return results;
 };
 
 // 35. Alternate the numbers in an array between positive and negative regardless of
@@ -548,12 +560,55 @@ var minimizeZeroes = function(array) {
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function(array) {
+  var results = [];
+  if (array.length === 1) {
+    return (array[0] > 0) ? array[0] : -array[0];
+  }
+
+  var value = array.pop();
+  value = (value > 0) ? value : -value;
+  results = results.concat(alternateSign(array));
+  if (results[results.length - 1] > 0) {
+    results.push(-value);
+  } else {
+    results.push(value);
+  }
+
+  return results;
 };
 
 // 36. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
 var numToText = function(str) {
+  var result = '';
+
+  if (str.length === 0) {
+    return result;
+  } else if (str[0] === '1') {
+    result += 'one';
+  } else if (str[0] === '2') {
+    result += 'two';
+  } else if (str[0] === '3') {
+    result += 'three';
+  } else if (str[0] === '4') {
+    result += 'four';
+  } else if (str[0] === '5') {
+    result += 'five';
+  } else if (str[0] === '6') {
+    result += 'six';
+  } else if (str[0] === '7') {
+    result += 'seven';
+  } else if (str[0] === '8') {
+    result += 'eight';
+  } else if (str[0] === '9') {
+    result += 'nine';
+  } else {
+    result += str[0];
+  }
+
+  result += numToText(str.substring(1));
+  return result;
 };
 
 
