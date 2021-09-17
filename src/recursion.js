@@ -612,6 +612,7 @@ var numToText = function(str) {
 };
 
 
+
 // *** EXTRA CREDIT ***
 
 // 37. Return the number of times a tag occurs in the DOM.
